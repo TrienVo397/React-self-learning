@@ -26,8 +26,8 @@ function App() {
   }
   const randomIntFromInterval = (min, max) => { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
-   }
-   
+  }
+
 
   // addNewTodo()
   return (
@@ -36,17 +36,15 @@ function App() {
         <div className="todo-title">Todo List</div>
         <TodoNew addNewTodo={addNewTodo}
         />
-        <TodoData
-          name={hoidanit}
-          ageofme123={age}
-          data={data}
-          todoList={todoList}
-        />
-
-        <div className="todo-image">
-          <img className="logo" src={reactLogo} alt="" />
-        </div>
-
+        {todoList.length > 0 ?
+          <TodoData
+            todoList={todoList}
+          />
+          :
+          <div className="todo-image">
+            <img className="logo" src={reactLogo} alt="" />
+          </div>
+        }
       </div>
     </>
   )

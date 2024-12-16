@@ -10,14 +10,13 @@ const TodoData = (props) => {
             {todoList.map((item, index) => {
                 console.log(">>> Check log ", item, index)
                 return (
-                    <div className="todo-item">
+                    <div className={`todo-item ${index}`} key={index}>
                         <div>{item.name}</div>
                         <button>Delete</button>
                     </div>)
             })}
             {/* <div>Learning React</div>
             <div>Watching Youtube</div> */}
-            <div>{JSON.stringify(props.todoList)}</div>
         </div>);
 }
 export default TodoData;

@@ -1,4 +1,4 @@
-import  {useState} from 'react'
+import { useState } from 'react'
 
 const TodoNew = (props) => {
 
@@ -7,7 +7,8 @@ const TodoNew = (props) => {
     const { addNewTodo } = props;
     // addNewTodo("eric")
     const handleClick = () => {
-        addNewTodo(valueInput)
+        addNewTodo(valueInput);
+        setValueInput("")
     }
 
     const handleOnChange = (name) => {
@@ -19,8 +20,11 @@ const TodoNew = (props) => {
         <div className="todo-new">
             <input type="text" placeholder="Add new task"
                 onChange={(event) => handleOnChange(event.target.value)
-                } />
-            <button style={{ cursor: 'pointer' }} onClick={handleClick}>Add</button>
+                }
+                value={valueInput} />
+            <button style={{ cursor: 'pointer' }}
+                onClick={handleClick}
+            >Add</button>
             My text input is {valueInput}
         </div>
     )

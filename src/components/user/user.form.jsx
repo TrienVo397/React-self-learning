@@ -1,8 +1,8 @@
 
 
 import { useState } from 'react';
-import { Input, Button } from 'antd';
-import axios from 'axios';
+import { Input, Button, notification } from 'antd';
+import { createUserApi } from '../../services/api.service';
 
 const UserForm = () => {
     const [fullName, setfullName] = useState('trien');
@@ -11,18 +11,17 @@ const UserForm = () => {
     const [phone, setphone] = useState('');
 
 
-    const handleOnClicked = () => {
-        const URL_BACKEND = 'http://localhost:8080/api/v1/user';
-        const data = {
-            fullName: fullName,
-            email:email,
-            password: password,
-            phone: phone
-        };
-        axios.post(URL_BACKEND, data)
-        console.log("Check fn: ", { fullName, email, password, phone });
-
+    const handleOnClicked = async () => {
+        const response = await createUserApi(fullName, email, password, phone);
+        if (response.data) { // check if the first data exists, then check the second data
+            notification.success({
+                message: 'Create user successfully',
+                description: 'Create user successfully'
+            })
+        }
+        console.log("Check res: ", response);
     }
+
     return (
         <div className='user-form' style={{ margin: '20px 0' }}>
             <div style={{ display: 'flex', flexDirection: "column", gap: '15px' }}>

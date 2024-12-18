@@ -1,18 +1,26 @@
 
 
-import {useState} from 'react';
+import { useState } from 'react';
 import { Input, Button } from 'antd';
-
+import axios from 'axios';
 
 const UserForm = () => {
-    const  [fullname, setFullname] = useState('trien');
+    const [fullName, setfullName] = useState('trien');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [phone, setphone] = useState('');
 
 
     const handleOnClicked = () => {
-        console.log("Check fn: ", {fullname, email, password, phoneNumber});
+        const URL_BACKEND = 'http://localhost:8080/api/v1/user';
+        const data = {
+            fullName: fullName,
+            email:email,
+            password: password,
+            phone: phone
+        };
+        axios.post(URL_BACKEND, data)
+        console.log("Check fn: ", { fullName, email, password, phone });
 
     }
     return (
@@ -20,30 +28,30 @@ const UserForm = () => {
             <div style={{ display: 'flex', flexDirection: "column", gap: '15px' }}>
                 <div>
                     <span>Full Name</span>
-                    <Input  value ={fullname}
-                    onChange={(event)=>
-                        setFullname(event.target.value)
-                    } />
+                    <Input value={fullName}
+                        onChange={(event) =>
+                            setfullName(event.target.value)
+                        } />
                 </div>
 
                 <div>
                     <span>Email</span>
-                    <Input value={email}onChange={(event) =>setEmail(event.target.value)} />
+                    <Input value={email} onChange={(event) => setEmail(event.target.value)} />
                 </div>
                 <div>
                     <span>Password</span>
                     <Input.Password value={password}
-                    onChange={(event) => setPassword(event.target.value)} />
+                        onChange={(event) => setPassword(event.target.value)} />
                 </div>
 
                 <div>
                     <span>Phone Number</span>
-                    <Input value={phoneNumber}
-                    onChange={(event) => setPhoneNumber(event.target.value)} />                </div>
+                    <Input value={phone}
+                        onChange={(event) => setphone(event.target.value)} />                </div>
 
                 <div>
                     <Button type='primary'
-                    onClick={handleOnClicked}>Create User</Button>
+                        onClick={handleOnClicked}>Create User</Button>
                 </div>
             </div>
         </div>

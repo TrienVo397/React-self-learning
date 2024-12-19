@@ -1,7 +1,7 @@
 
 
 import { useState } from 'react';
-import { Input, Button, notification } from 'antd';
+import { Input, Button, notification, message } from 'antd';
 import { createUserApi } from '../../services/api.service';
 
 const UserForm = () => {
@@ -12,14 +12,23 @@ const UserForm = () => {
 
 
     const handleOnClicked = async () => {
-        const response = await createUserApi(fullName, email, password, phone);
-        if (response.data) { // check if the first data exists, then check the second data
-            notification.success({
-                message: 'Create user successfully',
-                description: 'Create user successfully'
-            })
-        }
-        console.log("Check res: ", response);
+            const response = await createUserApi(fullName, email, password, phone);
+            if (response.data) { 
+                notification.success({
+                    message: 'Create user successfully',
+                    description: 'Create user successfully'
+                })
+            }
+            else{
+                notification.error({
+                    message:"Error creating user",
+                    description: JSON.stringify(response.message)
+                })
+            }
+            console.log("Check res: ", response);
+
+        
+
     }
 
     return (

@@ -1,53 +1,32 @@
-import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Table } from 'antd';
+import { fetchAllUsersApi } from '../../services/api.service';
+
 
 const UserTable = () => {
+  const [dataUsers, setDataUsers] = useState([
+    {
+      name:"eric",age:20, address:"Hanoi"
+    }
+  ]);
+  useEffect(() =>{
+    console.log('check dataUsers 111: ')
+    loadUser()
+
+  },[])
+
     const columns = [
         {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-          render: (text) => <a>{text}</a>,
+          title: 'Id',
+          dataIndex: '_id',// mapping data from dataUsers
         },
         {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
+          title: 'Full Name',
+          dataIndex: 'fullName',
         },
         {
-          title: 'Address',
-          dataIndex: 'address',
-          key: 'address',
-        },
-        {
-          title: 'Tags',
-          key: 'tags',
-          dataIndex: 'tags',
-          render: (_, { tags }) => (
-            <>
-              {tags.map((tag) => {
-                let color = tag.length > 5 ? 'geekblue' : 'green';
-                if (tag === 'loser') {
-                  color = 'volcano';
-                }
-                return (
-                  <Tag color={color} key={tag}>
-                    {tag.toUpperCase()}
-                  </Tag>
-                );
-              })}
-            </>
-          ),
-        },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (_, record) => (
-            <Space size="middle">
-              <a>Invite {record.name}</a>
-              <a>Delete</a>
-            </Space>
-          ),
+          title: 'Email',
+          dataIndex: 'email',
         },
       ];
       const data = [
@@ -73,8 +52,21 @@ const UserTable = () => {
           tags: ['cool', 'teacher'],
         },
       ];
+    
+    const column = [
+
+    ];
+
+    const loadUser = async() => {
+      const res = await fetchAllUsersApi();
+      setDataUsers(res.data)
+    }
+    console.log('check mount 000 ')
+
+
     return (
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={dataUsers} rowKey={"_id"} />
     );
 }
+
 export default UserTable;

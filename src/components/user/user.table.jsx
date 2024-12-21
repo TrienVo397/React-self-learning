@@ -5,10 +5,9 @@ import { fetchAllUsersApi } from '../../services/api.service';
 
 const UserTable = () => {
   const [dataUsers, setDataUsers] = useState([
-    {
-      name:"eric",age:20, address:"Hanoi"
-    }
+
   ]);
+  
   useEffect(() =>{
     console.log('check dataUsers 111: ')
     loadUser()
@@ -66,6 +65,7 @@ const UserTable = () => {
 
     return (
         <Table columns={columns} dataSource={dataUsers} rowKey={"_id"} />
+        
     );
 }
 

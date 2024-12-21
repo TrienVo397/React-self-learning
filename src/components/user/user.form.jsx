@@ -4,16 +4,18 @@ import { useEffect, useState } from 'react';
 import { Input, Button, notification, message, Modal } from 'antd';
 import { createUserApi } from '../../services/api.service';
 
-const UserForm = () => {
+const UserForm = (props) => {
+    const {loadUser} = props
+    console.log("Check props: ", props)
     const [fullName, setFullName] = useState('trien');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    useEffect(()=>{
-        handleSubmitButton()
-    },[])
+    // useEffect(() => {
+    //     handleSubmitButton()
+    // }, [])
 
 
     const handleSubmitButton = async () => {
@@ -23,7 +25,8 @@ const UserForm = () => {
                 message: 'Create user successfully',
                 description: 'Create user successfully'
             })
-            setIsModalOpen(false)
+            resetAndCloseModal()
+            await loadUser()
         }
         else {
             notification.error({
@@ -34,14 +37,20 @@ const UserForm = () => {
         console.log("Check res: ", response);
     }
 
-
+    const resetAndCloseModal = () => {
+        setIsModalOpen(false)
+        setFullName("")
+        setEmail("")
+        setPhone('')
+        setPassword("")
+    }
     return (
         <div className='user-form' style={{ margin: '20px 0' }}>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <h1>User Table</h1>
                 <Button type='primary'
-                    onClick={() => setIsModalOpen(true)}>Create User</Button>
+                    onClick={() =>setIsModalOpen(true)}>Create User</Button>
             </div>
 
             <Modal title="Create User"

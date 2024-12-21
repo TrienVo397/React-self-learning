@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
-import { fetchAllUsersApi } from '../../services/api.service';
 
 
-const UserTable = () => {
-  const [dataUsers, setDataUsers] = useState([
-
-  ]);
-  
-  useEffect(() =>{
-    console.log('check dataUsers 111: ')
-    loadUser()
-
-  },[])
+const UserTable = (props) => {
+  const {dataUsers} = props;
 
     const columns = [
         {
@@ -56,10 +47,7 @@ const UserTable = () => {
 
     ];
 
-    const loadUser = async() => {
-      const res = await fetchAllUsersApi();
-      setDataUsers(res.data)
-    }
+    
     console.log('check mount 000 ')
 
 

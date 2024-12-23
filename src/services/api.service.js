@@ -19,6 +19,11 @@ const updateUserApi = (_id, fullName, phone) => {
     };
     return axios.put(URL_BACKEND, data)
 }
+const deleteUserApi = (_id) => {
+    const URL_BACKEND = `/api/v1/user/${_id}`;
+    console.log("Check what in this promise: ", axios.delete(URL_BACKEND))
+    return axios.delete(URL_BACKEND)
+}
 
 
 const fetchAllUsersApi = () =>{
@@ -28,4 +33,4 @@ const fetchAllUsersApi = () =>{
 
 }
 
-export { createUserApi, updateUserApi, fetchAllUsersApi };
+export { createUserApi, updateUserApi, fetchAllUsersApi , deleteUserApi};

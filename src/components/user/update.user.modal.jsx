@@ -2,11 +2,11 @@
 import { useEffect, useState } from 'react';
 import { Input, notification, message, Modal } from 'antd';
 import { use } from 'react';
-// import { updateUserApi } from '../../services/api.service';
+import { updateUserApi } from '../../services/api.service';
 
 
 const UpdateUserModal = (props) => {
-    const {isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate} = props
+    const {isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate, loadUser} = props
     const [id, setId] = useState('');
     const [fullName, setFullName] = useState('trien');
     const [phone, setPhone] = useState('');
@@ -22,13 +22,13 @@ const UpdateUserModal = (props) => {
 
     // handle submit button
     const handleSubmitButton = async () => {
-        const response = await createUserApi(fullName, phone);
+        const response = await updateUserApi(id, fullName, phone);
         if (response.data) {
             notification.success({
-                message: 'Create user successfully',
-                description: 'Create user successfully'
+                message: 'Update user successfully',
+                description: 'Update user successfully'
             })
-            // await loadUser()
+            await loadUser()
             resetAndCloseModal()
         }
         else {
@@ -64,7 +64,7 @@ const UpdateUserModal = (props) => {
             </div>
             <div>
                 <span>Full Name</span>
-                <Input value={dataUpdate?.fullName}
+                <Input value={fullName}
                     onChange={(event) =>{
                         setFullName(event.target.value)
                     }

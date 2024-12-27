@@ -4,7 +4,7 @@ const instance = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL
 });
 
-// Alter defaults after instance has been createds
+// Alter defaults after instance has been created
 //   instance.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 

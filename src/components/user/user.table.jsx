@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Table, Popconfirm, notification } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import UpdateUserModal from './update.user.modal';
@@ -20,7 +20,6 @@ const UserTable = (props) => {
                 description: 'Delete user successfully'
             })
             await loadUser()
-            resetAndCloseModal()
         }
         else {
             notification.error({

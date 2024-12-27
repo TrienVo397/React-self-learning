@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { Input, notification, message, Modal } from 'antd';
-import { use } from 'react';
+import { Input, notification, Modal } from 'antd';
 import { updateUserApi } from '../../services/api.service';
 
 

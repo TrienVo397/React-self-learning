@@ -8,13 +8,10 @@ const ViewUserUpdate = (props) => {
         setIsDrawerUserDetailOpen,
         dataUpdate,
         setDataUpdate } = props
-
-
-
     return (
         <>
-
             <Drawer
+            width={"40vw"}
                 title="User Update"
                 onClose={() => setIsDrawerUserDetailOpen(false)}
                 open={isDrawerUserDetailOpen}>
@@ -24,6 +21,14 @@ const ViewUserUpdate = (props) => {
                         <p>Full Name: {dataUpdate.fullName}</p>
                         <p>Email: {dataUpdate.email}</p>
                         <p>Phone Number: {dataUpdate.phone}</p>
+                        <p>Avatar: </p>
+                        <img width={200} height={200}
+                        src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${dataUpdate.avatar}`} alt="avatar pic" />
+                        <div>
+                            <label htmlFor='btnUpload'>Upload Avatar</label>
+                            <input type="file" hidden id = "btnUpload"/>
+                            </div>
+                        {/* <Button type='primary'>Upload avatar</Button> */}
                     </div>
                     : <div> No data</div>
                 }

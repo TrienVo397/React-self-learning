@@ -43,7 +43,7 @@ const ViewUserDetail = (props) => {
                 loadUser()
                 notification.success({
                     message: "Success update user avatar",
-                    description: JSON.stringify(resUpload.message)
+                    description: JSON.stringify(resUpdatedAvatar.message)
                 })
             }
             console.log("Check new avatar ", newAvatar);

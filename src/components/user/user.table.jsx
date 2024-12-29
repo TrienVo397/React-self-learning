@@ -33,6 +33,19 @@ const UserTable = (props) => {
 
   const columns = [
     {
+      title: "STT",
+      render: (_, record, index) => //ứng với mỗi user, sẽ chạy lần lượt vào hàm render này
+      {
+        console.log("Check index: ", index)
+        return (
+        <div>
+          <p> {index + 1}</p>
+        </div>
+        )
+      }
+    },
+
+    {
       title: 'Id',
       dataIndex: '_id',// mapping data from dataUsers
       render: (_, record) => //ứng với mỗi user, sẽ chạy lần lượt vào hàm render này

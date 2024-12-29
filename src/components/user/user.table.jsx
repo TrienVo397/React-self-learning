@@ -14,21 +14,21 @@ const UserTable = (props) => {
   const [dataUpdate, setDataUpdate] = useState(null);
   const handleDelete = async (id) => {
     const response = await deleteUserApi(id);
-        if (response.data) {
-            notification.success({
-                message: 'Delete user successfully',
-                description: 'Delete user successfully'
-            })
-            await loadUser()
-        }
-        else {
-            notification.error({
-                message: "Error Deleting user",
-                description: JSON.stringify(response.message)
-            })
-        }
-        console.log("Check res: ", response);
-      }
+    if (response.data) {
+      notification.success({
+        message: 'Delete user successfully',
+        description: 'Delete user successfully'
+      })
+      await loadUser()
+    }
+    else {
+      notification.error({
+        message: "Error Deleting user",
+        description: JSON.stringify(response.message)
+      })
+    }
+    console.log("Check res: ", response);
+  }
 
 
   const columns = [
@@ -127,6 +127,7 @@ const UserTable = (props) => {
         setIsDrawerUserDetailOpen={setIsDrawerUserDetailOpen}
         dataUpdate={dataUpdate}
         setDataUpdate={setDataUpdate}
+        loadUser={loadUser}
       ></ViewUserDetail>
     </>
 

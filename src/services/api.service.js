@@ -4,7 +4,7 @@ const createUserApi = (fullName, email, password, phone) => {
     const URL_BACKEND = '/api/v1/user';
     const data = {
         fullName: fullName,
-        email:email,
+        email: email,
         password: password,
         phone: phone
     };
@@ -26,11 +26,37 @@ const deleteUserApi = (_id) => {
 }
 
 
-const fetchAllUsersApi = () =>{
+const fetchAllUsersApi = () => {
     const URL_BACKEND = '/api/v1/user';
 
     return axios.get(URL_BACKEND)
 
 }
 
-export { createUserApi, updateUserApi, fetchAllUsersApi , deleteUserApi};
+const handleUploadFile = (file, folder) => {
+    const URL_BACKEND = `/api/v1/file/upload`;
+    let config = {
+        headers: {
+            "upload-type": folder,
+            "Content-Type": "multipart/form-data"
+            
+        }
+    }
+    const data = new FormData();
+    data.append("fileImg", file) // fileImg là tên biến đã đc đặt trong back check trong postman và file sẽ chuyền vào fileImgfileImg
+    return axios.post(URL_BACKEND, data, config)
+}
+
+const updateUserAvatarApi = (avatar,_id,fullName, phone) => {
+    const URL_BACKEND = '/api/v1/user';
+    const data = {
+        avatar: avatar,
+        _id: _id,
+        fullName: fullName,
+        phone: phone
+    };
+    return axios.put(URL_BACKEND, data)
+}
+
+
+export { createUserApi, updateUserApi, fetchAllUsersApi, deleteUserApi, handleUploadFile, updateUserAvatarApi };

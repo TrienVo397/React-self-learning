@@ -40,7 +40,7 @@ const UserTable = (props) => {
         console.log("Check index: ", index)
         return (
           <div>
-            <p> {index + 1}</p>
+            <> {pageSize*(current-1) + index + 1}</>
           </div>
         )
       }
@@ -125,6 +125,19 @@ const UserTable = (props) => {
   console.log('check mount 000 ')
 
   const onChange = (pagination, filters, sorter, extra) => { 
+    // nếu thay đổi trang : current
+    if(pagination && pagination.current){
+      if(pagination.current !== current){
+        setCurrent(+pagination.current) //+ để chuyển từ string sang number
+      }
+    }
+    // nếu thay đổi số lượng hàng trên 1 trang: pageSize
+    if (pagination && pagination.pageSize) {
+      if(pagination.pageSize !== pageSize){
+        setPageSize(pagination.pageSize)
+      }
+    }
+
     console.log('params', {pagination, filters, sorter, extra});
   }
 

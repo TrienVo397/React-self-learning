@@ -9,11 +9,14 @@ const UsersPage = () => {
     const [pageSize, setPageSize] = useState(10);
     const [total, setTotal] = useState(0);
 
+
+    // empty array means this effect will only run once (like componentDidMount in classes)
+    // not empty => next value !== prev value => run effect
     useEffect(() => {
         console.log('check dataUsers 111: ')
         loadUser()
 
-    }, [])
+    }, [current, pageSize] )
     const loadUser = async () => {
         const res = await fetchAllUsersApi(current, pageSize);
         setDataUsers(res.data.result)
@@ -21,6 +24,8 @@ const UsersPage = () => {
         setPageSize(res.data.meta.pageSize);
         setTotal(res.data.meta.total)
     }
+    console.log("Check current: ", current)
+
     return (
         <div style={{ padding: '20px' }}>
             <UserForm loadUser={loadUser} />

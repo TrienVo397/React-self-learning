@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Input, Button, notification, Form, Row, Col, Divider, message } from 'antd';
 import { loginApi, registerUserApi } from '../services/api.service';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Password from 'antd/es/input/Password';
+import { AuthContext } from '../components/context/auth.context';
 
 const LoginPage = () => {
     const [loading, setLoading] =  useState(false)
     const navigate = useNavigate();
     const [form] = Form.useForm();
+    const{setUser} = useContext(AuthContext);
+
     const onFinish = async (values) => {
         setLoading(true)
         console.log('Success:', values);
@@ -17,6 +20,8 @@ const LoginPage = () => {
         )
         if (resLogin.data){
             message.success("Login successfully!")
+            localStorage.setItem("access_token", resLogin.data.access_token)
+            setUser(resLogin.data.user);
             navigate('/')
         }
         else{

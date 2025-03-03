@@ -1,7 +1,10 @@
 import { Link, NavLink } from 'react-router-dom'
 // import "./header.css"
 import { Menu } from 'antd';
-import { AuditOutlined, UsergroupDeleteOutlined, HomeOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+    AuditOutlined, UsergroupDeleteOutlined, HomeOutlined,
+    SettingOutlined, LoginOutlined, AliwangwangOutlined
+} from '@ant-design/icons';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/auth.context';
 
@@ -10,8 +13,8 @@ import { AuthContext } from '../context/auth.context';
 const Header = () => {
     const [current, setCurrent] = useState('');
     // const {data}  = useContext(AuthContext);
-    const {user}  = useContext(AuthContext);
-    console.log("<<AuthContext data", user)
+    const { user } = useContext(AuthContext);
+    console.log(">>> AuthContext data from header", user)
     const onClick = (e) => {
         console.log('click ', e);
         setCurrent(e.key);
@@ -20,37 +23,43 @@ const Header = () => {
 
     const items = [
         {
-            label: <Link to ={"/"}>Home</Link>,
+            label: <Link to={"/"}>Home</Link>,
             key: 'home',
             icon: <HomeOutlined />,
         },
         {
-            label: <Link to = {"/users"}>Users</Link> ,
+            label: <Link to={"/users"}>Users</Link>,
             key: 'users',
             icon: <UsergroupDeleteOutlined />,
         },
         {
-            label: <Link to = {"/book"}>Books</Link> ,
+            label: <Link to={"/book"}>Books</Link>,
             key: 'book',
             icon: <AuditOutlined />,
         },
-        {
-            label:  "Setting",
+
+        ...(!user.id ? [{
+            label: <Link to={"/login"}>Login</Link>,
+            key: 'login',
+            icon: <LoginOutlined />,
+        }] : []),
+
+
+        ...(user.id ? [{
+            label: "Welcome " + user.fullName,
             key: 'setting',
-            icon:<SettingOutlined />,
+            icon: <AliwangwangOutlined />,
             children: [
                 {
-                    label: <Link to = {"/login"}>Đăng nhập</Link> ,
-                    key: 'login',
-                    // icon: <AuditOutlined />,
-                },
-                {
-                    label: <Link to = {"/"}>Đăng xuất</Link> ,
+                    label: <Link to={"/"}>Đăng xuất</Link>,
                     // key: 'book',
                     // icon: <AuditOutlined />,
                 },
-              ],
-        },
+            ],
+        }] : []),
+
+
+
     ];
     return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
 }

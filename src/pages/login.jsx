@@ -19,7 +19,7 @@ const LoginPage = () => {
             values.password
         )
         if (resLogin.data){
-            message.success("Login successfully!")
+            message.success(`Login successfully!, ${resLogin.data.user.fullName}`)
             localStorage.setItem("access_token", resLogin.data.access_token)
             setUser(resLogin.data.user);
             navigate('/')

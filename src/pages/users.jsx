@@ -16,7 +16,7 @@ const UsersPage = () => {
         console.log('check dataUsers 111: ')
         loadUser()
 
-    }, [current, pageSize] )
+    }, [current, pageSize])
     const loadUser = async () => {
         const res = await fetchAllUsersApi(current, pageSize);
         setDataUsers(res.data.result)

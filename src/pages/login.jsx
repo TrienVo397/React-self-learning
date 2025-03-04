@@ -6,10 +6,10 @@ import Password from 'antd/es/input/Password';
 import { AuthContext } from '../components/context/auth.context';
 
 const LoginPage = () => {
-    const [loading, setLoading] =  useState(false)
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const [form] = Form.useForm();
-    const{setUser} = useContext(AuthContext);
+    const { setUser } = useContext(AuthContext);
 
     const onFinish = async (values) => {
         setLoading(true)
@@ -18,13 +18,13 @@ const LoginPage = () => {
             values.email,
             values.password
         )
-        if (resLogin.data){
+        if (resLogin.data) {
             message.success(`Login successfully!, ${resLogin.data.user.fullName}`)
             localStorage.setItem("access_token", resLogin.data.access_token)
             setUser(resLogin.data.user);
             navigate('/')
         }
-        else{
+        else {
             notification.error({
                 message: 'Login failed',
                 description: JSON.stringify(resLogin.message)
@@ -85,12 +85,16 @@ const LoginPage = () => {
 
                             ]}
                         >
-                            <Input.Password />
+                            <Input.Password onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                        form.submit()
+                                }
+                            }} />
                         </Form.Item>
 
                         <Row justify={"space-between"} align={"middle"} style={{ marginTop: '20px' }}>
                             <Button loading={loading}
-                            type='primary' onClick={() => form.submit()}>Login</Button>
+                                type='primary' onClick={() => form.submit()}>Login</Button>
                             <NavLink to="/"><p type="primary">Go to home page</p></NavLink>
                         </Row>
                         <Divider></Divider>
